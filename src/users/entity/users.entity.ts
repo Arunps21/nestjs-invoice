@@ -17,5 +17,5 @@ export class Users {
 
   @ManyToOne(() => ServiceProvider, (serviceProvider) => serviceProvider.users, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'service_provider_id' })
-  service_provider_id: ServiceProvider;
+  service_provider_id: number;
 }
