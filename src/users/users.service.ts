@@ -55,6 +55,7 @@ export class UsersService {
         where: {
           id,
         },
+        relations: ['service_provider_id'],
       });
     } catch (err) {
       console.log(err);
