@@ -66,7 +66,7 @@ export class InvoicesService {
       await this.invoicesRepository.update(id, status);
       return await this.invoicesRepository.findOne({ where: { id } });
     } catch (err) {
-      console.log(err);
+      throw new NotFoundException('Supplyer or Buyer is not available');
     }
   }
   public async deleteInvoice(id: number) {

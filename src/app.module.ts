@@ -5,6 +5,7 @@ import { ServiceProvidersModule } from './service-providers/service-providers.mo
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { InvoicesModule } from './invoices/invoices.module';
+import { TaxAuthorityLogsModule } from './tax-authority-logs/tax-authority-logs.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { InvoicesModule } from './invoices/invoices.module';
     }),
     UsersModule,
     InvoicesModule,
+    TaxAuthorityLogsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
