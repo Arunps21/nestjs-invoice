@@ -24,6 +24,12 @@ export class TaxAuthorityLogsService {
       if (!invoice) {
         return 'Invoice not found';
       }
+      const tax = await this.taxAuthorityLogRepository.findOne({
+        where: { invoice: taxAuthorityLog.invoice_id },
+      });
+      if (tax) {
+        return `Tax log already exists`;
+      }
       const log = this.taxAuthorityLogRepository.create(taxAuthorityLog);
       await this.taxAuthorityLogRepository.save(log);
       return `Tax authority log created successfully`;

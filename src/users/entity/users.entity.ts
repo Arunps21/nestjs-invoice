@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { ServiceProvider } from '../../service-providers/entity/service-provider.entity';
 
 @Entity('users')
@@ -15,7 +21,11 @@ export class Users {
   @Column({ type: 'varchar', length: 50, nullable: false })
   role: string;
 
-  @ManyToOne(() => ServiceProvider, (serviceProvider) => serviceProvider.users, { onDelete: 'CASCADE' })
+  @ManyToOne(
+    () => ServiceProvider,
+    (serviceProvider) => serviceProvider.users,
+    { onDelete: 'CASCADE', eager: true },
+  )
   @JoinColumn({ name: 'service_provider_id' })
   service_provider_id: number;
 }
