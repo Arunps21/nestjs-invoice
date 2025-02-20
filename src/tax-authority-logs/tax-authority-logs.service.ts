@@ -18,23 +18,28 @@ export class TaxAuthorityLogsService {
     taxAuthorityLog: CreateTaxAuthorityLogsDto,
   ) {
     try {
-      const invoice = await this.invoiceRepository.findOne({
+      const invoic = await this.invoiceRepository.findOne({
         where: { id: taxAuthorityLog.invoice_id },
       });
-      if (!invoice) {
+      console.log('ABC', taxAuthorityLog.invoice_id);
+      if (!invoic) {
         return 'Invoice not found';
       }
       const tax = await this.taxAuthorityLogRepository.findOne({
-        where: { invoice: taxAuthorityLog.invoice_id },
+        where: { invoice: { id: taxAuthorityLog.invoice_id } },
       });
       if (tax) {
         return `Tax log already exists`;
       }
-      const log = this.taxAuthorityLogRepository.create(taxAuthorityLog);
+      const log = this.taxAuthorityLogRepository.create({
+        comments: taxAuthorityLog.comments,
+        status: taxAuthorityLog.status,
+        invoice: invoic,
+      });
       await this.taxAuthorityLogRepository.save(log);
       return `Tax authority log created successfully`;
     } catch (err) {
-      throw new NotFoundException('Invoice not found');
+      return err;
     }
   }
   public async getTaxAuthorityLog() {

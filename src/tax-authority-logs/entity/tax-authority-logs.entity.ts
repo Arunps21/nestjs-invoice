@@ -18,7 +18,7 @@ export class TaxAuthorityLogs {
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'invoice_id' })
-  invoice: number;
+  invoice: Invoices;
 
   @Column({
     type: 'enum',
